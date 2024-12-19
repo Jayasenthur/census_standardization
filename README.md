@@ -6,12 +6,13 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 
 ## Key functionalities
 
-* **1. Data Cleaning :**  Renaming columns, standardizing State/UT names, and handling missing data.
-* **2. Missing Data Handling :** Detect missing data percentages, Impute missing values using logical relationships (e.g., `Population = Male + Female)`.
-* **3. State/UT Formation Handling :** Accounting for Telangana (2014) and Ladakh (2019) by processing district-specific changes.
-* **4. Data Storage :** Saving processed data to MongoDB
-* **5. Database Connection :** Fetching data from the mongoDB and uploading to a relational database using python code.
-* **6. Querying and Visualization :** Executing queries and displaying results using Streamlit for user-friendly dashboards.
+* **1. Data Acquisition :** Collect census data from structured files , read additional files (e.g., district lists for new states) and integrate them.
+* **2. Data Cleaning :**  Renaming columns, standardizing State/UT names, and handling missing data.
+* **3. Missing Data Handling :** Detect missing data percentages, Impute missing values using logical relationships (e.g., `Population = Male + Female)`.
+* **4. State/UT Formation Handling :** Accounting for Telangana (2014) and Ladakh (2019) by processing district-specific changes.
+* **5. Data Storage :** Saving processed data to MongoDB
+* **6. Database Connection :** Fetching data from the mongoDB and uploading to a relational database using python code.
+* **7. Querying and Visualization :** Executing queries and displaying results using Streamlit for user-friendly dashboards.
   
 ## Tasks covered 
 
@@ -24,10 +25,24 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 
 ## Technologies Used
 
-* **Python**
-* **Pandas**
-* **SQL**
-* **MongoDB**
-* **Streamlit**
+## Python
+
+* **Role :**  Python serves as the backbone of the project, orchestrating all the tasks from data cleaning to visualization.
+* **How It’s Used:**
+  * Reading census data from files (CSV, TXT, etc.).
+  * Automating data cleaning tasks, such as renaming columns, formatting State/UT names, and processing missing data.
+  * Implementing conditional logic for specific tasks, such as splitting states based on historical changes.
+  * Establishing connections with databases (MongoDB and relational databases).
+  * Writing queries for analysis and running them programmatically.
+ 
+## Pandas
+
+* **Role :** Pandas is used for data manipulation and processing.
+* **How It’s Used:**
+  * `Data Cleaning`: Renaming columns, standardizing data formats, and handling missing values.
+
+
+
+
 
 
