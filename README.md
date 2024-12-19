@@ -40,6 +40,15 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 * **Role :** Pandas is used for data manipulation and processing.
 * **How It’s Used:**
   * `Data Cleaning`: Renaming columns, standardizing data formats, and handling missing values.
+  * `Analysis`: Performing aggregations (e.g., total population, literacy rates) and deriving insights like household distributions and age groups.
+  * `Validation`: Verifying calculations like the total population by summing subsets (e.g., male + female).
+  * `Exporting Data`: Preparing the cleaned and processed data for storage in MongoDB or a relational database.
+
+## SQL
+
+* **Role :** SQL is used for structured data storage, querying, and analysis.
+* **How It’s Used:**
+  * 
 
 
 
