@@ -48,7 +48,9 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 
 * **Role :** SQL is used for structured data storage, querying, and analysis.
 * **How It’s Used:**
-  * 
+  * `Relational Database Storage`: Data from MongoDB collections is uploaded to SQL-based relational databases (e.g., MySQL).
+  * `Querying`: Running the project-specific queries to extract insights like population distribution, literacy rates, and household conditions.
+  * `Streamlit Integration`: SQL queries are executed in Python, and results are displayed via Streamlit.
 
 
 
