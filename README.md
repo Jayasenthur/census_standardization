@@ -51,7 +51,24 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
   * `Relational Database Storage`: Data from MongoDB collections is uploaded to SQL-based relational databases (e.g., MySQL).
   * `Querying`: Running the project-specific queries to extract insights like population distribution, literacy rates, and household conditions.
   * `Streamlit Integration`: SQL queries are executed in Python, and results are displayed via Streamlit.
+ 
+## MongoDB
 
+* **Role :** MongoDB acts as the initial data storage layer for unstructured or semi-structured data.
+* **How It’s Used:**
+ * `Storing Processed Data`: Processed census data is saved as a MongoDB collection named `census`.
+ *  `Data Retrieval`: MongoDB serves as the source for transferring data to a relational database.
+
+## Streamlit
+
+* **Role :** Streamlit provides the user interface for interaction, data visualization, and displaying query results.
+* * **How It’s Used:**
+  * `Visualization`: Charts, tables, and graphs are displayed for insights like household size distribution or population breakdown.
+  * `Query Execution`: Users select predefined queries, and the app fetches and displays the results dynamically.
+  * `User Interaction`: Input options allow users to explore different aspects of the census data (e.g., filtering by district or state).
+  * `Real-Time Results`: Displays query outputs and visualizations in an intuitive dashboard format.
+
+This combination of technologies ensures the project efficiently handles the entire workflow—from data cleaning and analysis to visualization.
 
 
 
