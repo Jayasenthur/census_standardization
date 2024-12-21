@@ -78,9 +78,18 @@ This combination of technologies ensures the project efficiently handles the ent
 !pip install streamlit
 !pip install sqlalchemy
 ```
+## Data Cleaning, Modifying, and Processing
 
+### Purpose 
+The aim is to ensure the census data is accurate, uniform, and ready for analysis. This involves cleaning inconsistent values, standardizing formats, and handling missing data while adhering to business rules.
 
+### Task 1 : Column Renaming for Consistency
 
+ * Renamed columns to maintain uniformity across datasets.
+ * Example: State name → State_UT, Male_Literate → Literate_Male.
+ * Ensured column names adhere to character length limits (max 60 characters).
+
+### Task 2 : State/UT Name Standardization
 
 
 
