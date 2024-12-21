@@ -70,6 +70,16 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 
 This combination of technologies ensures the project efficiently handles the entire workflow—from data cleaning and analysis to visualization.
 
+## Libraries to install
+```bash
+!python -m pip install pymongo --upgrade
+!pip install pandas
+!pip install mysql-connector-python
+!pip install streamlit
+!pip install sqlalchemy
+```
+
+
 
 
 
