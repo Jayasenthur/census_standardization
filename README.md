@@ -91,5 +91,7 @@ The aim is to ensure the census data is accurate, uniform, and ready for analysi
 
 ### Task 2 : State/UT Name Standardization
 
+* Reformatted state/UT names to follow title case.
+
 
 
