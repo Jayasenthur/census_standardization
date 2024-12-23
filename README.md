@@ -23,6 +23,33 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 * **Task 5:** Saving the cleaned data to MongoDB.
 * **Task 6:** Uploading data to relational databases
 
+  ### Pipeline Diagram
+  
+```plaintext
++-----------------+      +------------------+      +-------------------+
+|   Raw Data      | ---> | Data Cleaning    | ---> | Data Transformation|
++-----------------+      +------------------+      +-------------------+
+                                 |
+                                 v
+                       +-------------------+
+                       |  Data Validation  |
+                       +-------------------+
+                                 |
+                                 v
+                       +-------------------+
+                       | Data Storage/DB   |
+                       +-------------------+
+                                 |
+                                 v
+                       +-------------------+
+                       | Analysis /        |  
+                       |  Visualization    |
+                       +-------------------+
+
+```
+
+---
+
 ## Technologies Used
 
 ## Python
@@ -86,12 +113,47 @@ The aim is to ensure the census data is accurate, uniform, and ready for analysi
 ### Task 1 : Column Renaming for Consistency
 
  * Renamed columns to maintain uniformity across datasets.
- * Example: State name → State_UT, Male_Literate → Literate_Male.
  * Ensured column names adhere to character length limits (max 60 characters).
+ * Updated column names:
+  - `State name` → `State_UT`
+  - `District name` → `District`
+  - `Male_Literate` → `Literate_Male`
+  - `Female_Literate` → `Literate_Female`
+  - `Rural_Households` → `Households_Rural`
+  - `Urban_Households` → `Households_Urban`
+  - `Age_Group_0_29` → `Young_and_Adult`
+  - `Age_Group_30_49` → `Middle_Aged`
+  - `Age_Group_50` → `Senior_Citizen`
+  - `Age not stated` → `Age_Not_Stated`
+
+### Examples
+
+| Original Column Name        | Updated Column Name     |
+|-----------------------------|-------------------------|
+| State name                  | State_UT                |
+| District name               | District                |
+| Male_Literate               | Literate_Male           |
+| Female_Literate             | Literate_Female         |
+| Rural_Households            | Households_Rural        |
+| Urban_Households            | Households_Urban        |
+| Age_Group_0_29              | Young_and_Adult         |
+| Age_Group_30_49             | Middle_Aged             |
+| Age_Group_50                | Senior_Citizen          |
+| Age not stated              | Age_Not_Stated          |
+
 
 ### Task 2 : State/UT Name Standardization
 
-* Reformatted state/UT names to follow title case.
+* Converted all-uppercase State/UT names to title case, ensuring only the first letter of each word is capitalized.
+* Replaced the `&` symbol with "and" for uniformity.
+* Ensured the word "and" is always in lowercase, irrespective of its position in the name.
 
+## Examples
+
+| Original Name                | Standardized Name          |
+|------------------------------|----------------------------|
+| ANDAMAN & NICOBAR ISLANDS    | Andaman and Nicobar Islands|
+| ARUNACHAL PRADESH            | Arunachal Pradesh          |
+| BIHAR                        | Bihar                      |
 
 
