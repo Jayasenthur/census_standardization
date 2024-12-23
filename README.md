@@ -1,4 +1,4 @@
-# Census Data Standardization and Analysis Pipeline
+ # Census Data Standardization and Analysis Pipeline
 
 ## Overview
 
@@ -141,6 +141,28 @@ The aim is to ensure the census data is accurate, uniform, and ready for analysi
 | Age_Group_50                | Senior_Citizen          |
 | Age not stated              | Age_Not_Stated          |
 
+### Code Example
+```python
+import pandas as pd
+
+df=pd.read_csv("census_2011.csv")
+
+# Task 1: Rename the Column names
+change_column_name={
+  'State name': 'State/UT',
+  'District name': 'District',
+  'Male_Literate': 'Literate_Male',
+  'Female_Literate': 'Literate_Female',
+  'Rural_Households': 'Households_Rural',
+  'Urban_ Households': 'Households_Urban',
+  'Age_Group_0_29': 'Young_and_Adult',
+  'Age_Group_30_49': 'Middle_Aged',
+  'Age_Group_50': 'Senior_Citizen',
+  'Age not stated': 'Age_Not_Stated'
+}
+df.rename(columns=change_column_name,inplace=True)
+
+```
 
 ### Task 2 : State/UT Name Standardization
 
@@ -155,6 +177,23 @@ The aim is to ensure the census data is accurate, uniform, and ready for analysi
 | ANDAMAN & NICOBAR ISLANDS    | Andaman and Nicobar Islands|
 | ARUNACHAL PRADESH            | Arunachal Pradesh          |
 | BIHAR                        | Bihar                      |
+
+### Code Example
+```python
+import pandas as pd
+df=pd.read_csv("census_2011.csv")
+
+# Task 2: Rename State/UT Names
+def Capitalization(df):
+    for i in range(len(df)):
+        x = df.loc[i,'State/UT'].lower().split()
+        for j in range(len(x)):
+            if x[j] != 'and':
+                x[j] = x[j].capitalize()
+        df.loc[i,'State/UT'] = " ".join(x)
+
+Capitalization(df)
+```
 
 ## Task 3: New State/UT Formation
 
@@ -171,6 +210,34 @@ The aim is to ensure the census data is accurate, uniform, and ready for analysi
 | Jammu and Kashmir           | Leh               | Ladakh                 |
 | Jammu and Kashmir           | Kargil            | Ladakh                 |
 
+### Code Example
+```python
+import pandas as pd
+df=pd.read_csv("census_2011.csv")
+
+# Task 3: New State/UT formation
+with open('Telangana.txt', 'r') as telangana:
+    telangana_districts = telangana.read()
+telangana_districts = telangana_districts.split("\n")
+
+# setting the values as Telangana if the districts are in the telangana_districts list
+def telangana(df):
+    for i in range(len(df)):
+        if df.loc[i,'District'] in telangana_districts:
+            df.loc[i,'State/UT'] = "Telangana"
+
+telangana(df)
+
+# setting the values as Ladakh if the districts are in the ladakh list
+def ladakh(df):
+    ladakh = ['Leh', 'Kargil']
+    for district in ladakh:
+        for i in range(len(df)):
+            if district in df.loc[i,'District']:
+                df.loc[i,'State/UT'] = "Ladakh"
+
+ladakh(df)
+```
 ## Task 4: Find and Process Missing Data
 
 * Identified and calculated the percentage of missing data for each column.
@@ -236,7 +303,7 @@ except Exception as e:
 ```
 ## Task 6: Database Connection and Data Upload
 
-* Retrieved data from MongoDB and uploaded it to a relational database.
+* Retrieved data from MongoDB and uploaded it to a relational database MySQL.
 * Used the file name (without extension) as the table name in the relational database.
 * Added primary and foreign key constraints wherever necessary.
 ```python
@@ -301,5 +368,57 @@ if not df.empty:
 else:
     print("No data to insert into MySQL.")
 ```
+## Task 7 : Run Query on the database and show output on streamlit
 
-
+* **1. What is the total population of each district?**
+  ```sql
+  SELECT district, SUM(population) AS total_population 
+        FROM census
+        GROUP BY district;
+  ```
+* **2. How many literate males and females are there in each district?**
+```sql
+SELECT 
+    District,
+    SUM(Male) AS Total_Male,
+    SUM(Female) AS Total_Female,
+    SUM(Literate_Male) AS Literate_Male,
+    SUM(Literate_Female) AS Literate_Female
+FROM 
+    census
+GROUP BY 
+    District;
+```
+* **3. What is the percentage of workers (both male and female) in each district?**
+```sql
+SELECT 
+    District,
+    ROUND((SUM(Male_Workers + Female_Workers) / SUM(Population)) * 100, 2) AS Workers_Percentage
+FROM 
+    census
+GROUP BY 
+    District;
+```
+* **4. How many households have access to LPG or PNG as a cooking fuel in each district?**
+```sql
+SELECT 
+    `District` AS District_Name,
+    SUM(`LPG_or_PNG_Households`) AS Households_With_LPG_PNG
+FROM 
+    census
+GROUP BY 
+    `District`;
+```
+* **5. What is the religious composition (Hindus, Muslims, Christians, etc.) of each district?**
+```sql
+SELECT  `District`,  `State/UT`,  
+            ROUND((Hindus/Population)*100 , 2) AS Hindus, 
+                ROUND((Muslims/Population)*100 , 2) AS Muslims, 
+                    ROUND((Christians/Population)*100 , 2) AS Christians, 
+                        ROUND((Sikhs/Population)*100 , 2) AS Sikhs, 
+                            ROUND((Buddhists/Population)*100 , 2) AS Buddhists, 
+                                ROUND((Jains/Population)*100 , 2) AS Jains, 
+                                    ROUND((Others_Religions/Population)*100 , 2) AS Other_Religions, 
+                                        ROUND((Religion_Not_Stated/Population)*100 , 2) AS Religion_Not_Stated 
+                                            FROM census
+```
