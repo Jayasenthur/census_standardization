@@ -411,14 +411,22 @@ GROUP BY
 ```
 * **5. What is the religious composition (Hindus, Muslims, Christians, etc.) of each district?**
 ```sql
-SELECT  `District`,  `State/UT`,  
-            ROUND((Hindus/Population)*100 , 2) AS Hindus, 
-                ROUND((Muslims/Population)*100 , 2) AS Muslims, 
-                    ROUND((Christians/Population)*100 , 2) AS Christians, 
-                        ROUND((Sikhs/Population)*100 , 2) AS Sikhs, 
-                            ROUND((Buddhists/Population)*100 , 2) AS Buddhists, 
-                                ROUND((Jains/Population)*100 , 2) AS Jains, 
-                                    ROUND((Others_Religions/Population)*100 , 2) AS Other_Religions, 
-                                        ROUND((Religion_Not_Stated/Population)*100 , 2) AS Religion_Not_Stated 
-                                            FROM census
+SELECT 
+    District,
+    SUM(Hindus) AS Hindus,
+    SUM(Muslims) AS Muslims,
+    SUM(Christians) AS Christians,
+    SUM(Sikhs) AS Sikhs,
+    SUM(Buddhists) AS Buddhists,
+    SUM(Jains) AS Jains,
+    SUM(Others_Religions) AS Other_Religions,
+    SUM(Religion_Not_Stated) AS Religions_Not_Stated
+FROM 
+    census
+GROUP BY 
+    District
+```
+* **6. How many households have internet access in each district?**
+```sql
+
 ```
