@@ -55,20 +55,16 @@ GROUP BY
     `District`;
 """,
     "Religious composition of each district": """
-    SELECT 
-    `District` AS District_Name,
-    SUM(`Hindus`) AS Total_Hindus,
-    SUM(`Muslims`) AS Total_Muslims,
-    SUM(`Christians`) AS Total_Christians,
-    SUM(`Sikhs`) AS Total_Sikhs,
-    SUM(`Buddhists`) AS Total_Buddhists,
-    SUM(`Jains`) AS Total_Jains,
-    SUM(`Others_Religions`) AS Total_Other_Religions,
-    SUM(`Religion_Not_Stated`) AS Religion_Not_Stated
-FROM 
-    census
-GROUP BY 
-    `District`;
+    SELECT  `District`,  `State/UT`,  
+            ROUND((Hindus/Population)*100 , 2) AS Hindus, 
+                ROUND((Muslims/Population)*100 , 2) AS Muslims, 
+                    ROUND((Christians/Population)*100 , 2) AS Christians, 
+                        ROUND((Sikhs/Population)*100 , 2) AS Sikhs, 
+                            ROUND((Buddhists/Population)*100 , 2) AS Buddhists, 
+                                ROUND((Jains/Population)*100 , 2) AS Jains, 
+                                    ROUND((Others_Religions/Population)*100 , 2) AS Other_Religions, 
+                                        ROUND((Religion_Not_Stated/Population)*100 , 2) AS Religion_Not_Stated 
+                                            FROM census;
 
     """,
     "No. of Households with internet access in each district": """
