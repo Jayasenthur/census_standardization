@@ -156,4 +156,150 @@ The aim is to ensure the census data is accurate, uniform, and ready for analysi
 | ARUNACHAL PRADESH            | Arunachal Pradesh          |
 | BIHAR                        | Bihar                      |
 
+## Task 3: New State/UT Formation
+
+* Accounted for the formation of new states/UTs from parent states/UTs based on the census year.
+* Updated State/UT names for the relevant districts as follows:
+  - **Telangana Formation (2014)**: Renamed `Andhra Pradesh` to `Telangana` for districts listed in `Data/Telangana.txt`.
+  - **Ladakh Formation (2019)**: Renamed `Jammu and Kashmir` to `Ladakh` for the districts `Leh` and `Kargil`.
+
+### Examples
+
+| Original State/UT Name      | District          | Updated State/UT Name  | 
+|-----------------------------|-------------------|------------------------|
+| Andhra Pradesh              | Hyderabad         | Telangana              |
+| Jammu and Kashmir           | Leh               | Ladakh                 |
+| Jammu and Kashmir           | Kargil            | Ladakh                 |
+
+## Task 4: Find and Process Missing Data
+
+* Identified and calculated the percentage of missing data for each column.
+* Applied data-filling techniques using information from other cells to infer missing values.
+* Updated formulas for filling missing data:
+  - **Population** = `Male + Female`
+  - **Literate** = `Literate_Male + Literate_Female`
+  - **Population** = `Young_and_Adult + Middle_Aged + Senior_Citizen + Age_Not_Stated`
+  - **Households** = `Households_Rural + Households_Urban`
+* Compared the percentage of missing data before and after the data-filling process.
+
+### Examples
+
+| Column Name       | Missing Data (Before) | Missing Data (After) |
+|-------------------|-----------------------|----------------------|
+| Population        | 10%                   | 0%                   |
+| Literate          | 5%                    | 0%                   |
+| Households        | 8%                    | 0%                   |
+
+## Task 5: Save Data to MongoDB
+
+* Saved the processed data to MongoDB for persistent storage and analysis.
+* The data is stored in a database named `census_db` with a collection named `census`.
+
+
+### Code Example
+```python
+import pandas as pd
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+
+# Load CSV file
+df = pd.read_csv("cleandata.csv")
+
+# MongoDB Connection URI
+uri = "mongodb+srv://jayasenthur:1234@cluster0.78ilsyt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+# Create a new client and connect to MongoDB
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+# Test MongoDB connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(f"Error connecting to MongoDB: {e}")
+    exit()
+
+# Define Database and Collection
+db = client['census_db']
+collection = db['census']
+
+# Insert Data into MongoDB
+try:
+    if not df.empty:
+        records = df.to_dict(orient='records')
+        collection.insert_many(records)
+        print(f"Inserted {len(records)} records into MongoDB.")
+    else:
+        print("No data to insert into MongoDB.")
+except Exception as e:
+    print(f"Error inserting data into MongoDB: {e}")
+```
+## Task 6: Database Connection and Data Upload
+
+* Retrieved data from MongoDB and uploaded it to a relational database.
+* Used the file name (without extension) as the table name in the relational database.
+* Added primary and foreign key constraints wherever necessary.
+```python
+# Retrieve Data from MongoDB
+try:
+    print("\nRecords from MongoDB:")
+    mongo_data = list(collection.find({}, {'_id': 0}))  # Exclude '_id' from MongoDB documents
+    df = pd.DataFrame(mongo_data)  # Convert to DataFrame
+    if '_id' in df.columns:
+     df = df.drop(columns=['_id'])
+
+    if df.empty:
+        print("No data found in MongoDB.")
+    
+except Exception as e:
+    print(f"Error fetching records from MongoDB: {e}")
+
+    # Dictionary to renaming columns which length are more than 65
+column_rename_map = {
+    'Households_with_TV_Computer_Laptop_Telephone_mobile_phone_and_Scooter_Car': 'Households_TV_Computer_Laptop_Telephone_mobile_phone_Scooter_Car',
+    #----------------------------
+    'Type_of_latrine_facility_Night_soil_disposed_into_open_drain_Households':'Type_of_latrine_facility_Night_soil_disposed_into_open_drain',
+    #----------------------------
+    'Type_of_latrine_facility_Flush_pour_flush_latrine_connected_to_other_system_Households':'Type_of_latrine_Flush_pour_connected_to_other_system_Households',
+    #----------------------------
+    'Not_having_latrine_facility_within_the_premises_Alternative_source_Open_Households':'Not_having_latrine_within_premises_Other_source_Open_Households',
+    #----------------------------
+    'Main_source_of_drinking_water_Handpump_Tubewell_Borewell_Households':'Source_of_drinking_water_Handpump_Tubewell_Borewell_Households',
+    #----------------------------
+    'Main_source_of_drinking_water_Other_sources_Spring_River_Canal_Tank_Pond_Lake_Other_sources__Households':'Drinking_water_Spring_River_Canal_Tank_Pond_Lake_Other_Household'
+    
+}
+
+df = df.rename(columns=column_rename_map)
+
+# MySQL Connection Setup
+mysql_user = "root"
+mysql_password = "root"  # Replace with your MySQL password
+mysql_host = "localhost"
+mysql_db = "census"  # Replace with your MySQL database name
+
+# Create SQLAlchemy engine to interact with MySQL
+engine = create_engine(f'mysql+mysqlconnector://{mysql_user}:{mysql_password}@{mysql_host}/{mysql_db}')
+
+# Create the database if not exists
+try:
+    connection = mysql.connector.connect(user=mysql_user, password=mysql_password, host=mysql_host)
+    cursor = connection.cursor()
+    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {mysql_db};")
+    connection.commit()
+    cursor.close()
+except Exception as e:
+    print(f"Error creating database in MySQL: {e}")
+
+# Upload the DataFrame to MySQL
+if not df.empty:
+    try:
+        df.to_sql('census', con=engine, if_exists='replace', index=False)
+        print("Data uploaded to MySQL database successfully.")
+    except Exception as e:
+        print(f"Error uploading data to MySQL: {e}")
+else:
+    print("No data to insert into MySQL.")
+```
+
 
