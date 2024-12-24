@@ -428,5 +428,135 @@ GROUP BY
 ```
 * **6. How many households have internet access in each district?**
 ```sql
+SELECT District, SUM(Households_with_Internet) AS LPG_PNG_Households
+FROM census
+GROUP BY District;
+```
+* **7. What is the educational attainment distribution (below primary, primary, middle, secondary, etc.) in each district?**
+```sql
+SELECT 
+    `District` AS District_Name,
+    SUM(`Below_Primary_Education`) AS Below_Primary,
+    SUM(`Primary_Education`) AS PrimaryEducation,
+    SUM(`Middle_Education`) AS Middle,
+    SUM(`Secondary_Education`) AS SecondaryEducation,
+    SUM(`Higher_Education`) AS Higher,
+    SUM(`Graduate_Education`) AS Graduate,
+    SUM(`Other_Education`) AS Other
+FROM 
+    census
+GROUP BY 
+    `District`;
+```
 
+* **8. How many households have access to various modes of transportation (bicycle, car, radio, television, etc.) in each district?**
+```sql
+SELECT 
+    `District` AS District_Name,
+    SUM(`Households_with_Bicycle`) AS Bicycle,
+    SUM(`Households_with_Car_Jeep_Van`) AS Car_Jeep_Van,
+    SUM(`Households_with_Radio_Transistor`) AS Radio_Transistor,
+    SUM(`Households_with_Television`) AS Television,
+    SUM(`Households_with_Scooter_Motorcycle_Moped`) AS Scooter_Motorcycle_Moped
+FROM 
+    census
+GROUP BY 
+    `District`;
+```
+
+* **9. What is the condition of occupied census houses (dilapidated, with separate kitchen, with bathing facility, with latrine facility, etc.) in each district?**
+```sql
+SELECT 
+    `District` AS District_Name,
+    SUM(`Condition_of_occupied_census_houses_Dilapidated_Households`) AS Dilapidated_Houses,
+    SUM(`Households_with_separate_kitchen_Cooking_inside_house`) AS Separate_Kitchen,
+    SUM(`Having_bathing_facility_Total_Households`) AS Bathing_Facility,
+    SUM(`Having_latrine_facility_within_the_premises_Total_Households`) AS Latrine_Facility
+FROM 
+    census
+GROUP BY 
+    `District`;
+```
+
+* **10. How is the household size distributed (1 person, 2 persons, 3-5 persons, etc.) in each district?**
+```sql
+SELECT 
+    `District` AS District_Name,
+    SUM(`Household_size_1_person_Households`) AS One_Person_Households,
+    SUM(`Household_size_2_persons_Households`) AS Two_Person_Households,
+    SUM(`Household_size_3_to_5_persons_Households`) AS Three_to_Five_Person_Households,
+    SUM(`Household_size_6_8_persons_Households`) AS Six_to_Eight_Person_Households,
+    SUM(`Household_size_9_persons_and_above_Households`) AS Nine_or_More_Person_Households
+FROM 
+    census
+GROUP BY 
+    `District`;
+```
+
+* **11. What is the total number of households in each state?**
+```sql
+SELECT 
+    `State/UT` AS State,
+    SUM(Households) AS Total_Households
+FROM census
+GROUP BY `State/UT`;
+```
+
+* **12.How many households have a latrine facility within the premises in each state?**
+```sql
+SELECT 
+    `State/UT` AS State_Name,
+    SUM(`Having_latrine_facility_within_the_premises_Total_Households`) AS Households_With_Latrine_Facility
+FROM 
+    census
+GROUP BY 
+    `State/UT`;
+```
+
+* **13. What is the average household size in each state?**
+```sql
+SELECT 
+    `State/UT` AS State_Name,
+    ROUND(AVG(`Households` / NULLIF(`Population`, 0)), 2) AS Average_Household_Size
+FROM 
+    census
+GROUP BY 
+    `State/UT`;
+```
+
+* **14. How many households are owned versus rented in each state?**
+```sql
+SELECT 
+    `State/UT` AS State_Name,
+    SUM(`Ownership_Owned_Households`) AS Owned_Households,
+    SUM(`Ownership_Rented_Households`) AS Rented_Households
+FROM 
+    census
+GROUP BY 
+    `State/UT`;
+```
+
+* **15. What is the distribution of different types of latrine facilities (pit latrine, flush latrine, etc.) in each state?**
+```sql
+SELECT 
+    `State/UT` AS State_Name,
+    SUM(`Type_of_latrine_facility_Pit_latrine_Households`) AS Pit_Latrine_Households,
+    SUM(`Type_of_latrine_Flush_pour_connected_to_other_system_Households`) AS Flush_Latrine_Households,
+    SUM(`Type_of_latrine_facility_Other_latrine_Households`) AS Other_Latrine_Households,
+    SUM(`Type_of_latrine_facility_Night_soil_disposed_into_open_drain`) AS Night_Soil_Disposal_Households
+FROM 
+    census
+GROUP BY 
+    `State/UT`;
+```
+
+* **16. How many households have access to drinking water sources near the premises in each state?**
+```sql
+SELECT 
+    `State/UT` AS State_Name,
+    SUM(`Location_of_drinking_water_source_Near_the_premises_Households`) AS Households_Near_Water_Source
+FROM 
+    census
+GROUP BY 
+    `State/UT`;
 ```
