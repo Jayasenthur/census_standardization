@@ -4,7 +4,7 @@
 
 This project focuses on cleaning, processing, and analyzing census data to ensure uniformity, accuracy, and accessibility. 
 
-## Key functionalities
+## Basic workflow
 
 * **1. Data Acquisition :** Collect census data from structured files , read additional files (e.g., district lists for new states) and integrate them.
 * **2. Data Cleaning :**  Renaming columns, standardizing State/UT names, and handling missing data.
