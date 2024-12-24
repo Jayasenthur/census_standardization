@@ -71,7 +71,7 @@ GROUP BY
     District;
     """,
     "No. of Households with internet access in each district": """
-    SELECT District, SUM(LPG_or_PNG_Households) AS LPG_PNG_Households
+    SELECT District, SUM(Households_with_Internet) AS LPG_PNG_Households
 FROM census
 GROUP BY District;
 """,
