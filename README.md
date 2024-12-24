@@ -560,3 +560,58 @@ FROM
 GROUP BY 
     `State/UT`;
 ```
+
+* **17. What is the average household income distribution in each state based on the power parity categories?**
+```sql
+SELECT 
+    `State/UT` AS State_Name,
+    AVG(`Power_Parity_Less_than_Rs_45000`) AS Avg_Less_Than_45000,
+    AVG(`Power_Parity_Rs_45000_90000`) AS Avg_45000_to_90000,
+    AVG(`Power_Parity_Rs_90000_150000`) AS Avg_90000_to_150000,
+    AVG(`Power_Parity_Rs_150000_240000`) AS Avg_150000_to_240000,
+    AVG(`Power_Parity_Rs_240000_330000`) AS Avg_240000_to_330000,
+    AVG(`Power_Parity_Rs_330000_425000`) AS Avg_330000_to_425000,
+    AVG(`Power_Parity_Rs_425000_545000`) AS Avg_425000_to_545000,
+    AVG(`Power_Parity_Above_Rs_545000`) AS Avg_Above_545000
+FROM 
+    census
+GROUP BY 
+    `State/UT`;
+```
+
+* **18. What is the percentage of married couples with different household sizes in each state?**
+```sql
+SELECT 
+    `State/UT` AS State_Name,
+    ROUND(SUM(`Married_couples_1_Households`) * 100.0 / SUM(`Households`), 2) AS Percent_1_Couple,
+    ROUND(SUM(`Married_couples_2_Households`) * 100.0 / SUM(`Households`), 2) AS Percent_2_Couples,
+    ROUND(SUM(`Married_couples_3_Households`) * 100.0 / SUM(`Households`), 2) AS Percent_3_Couples,
+    ROUND(SUM(`Married_couples_3_or_more_Households`) * 100.0 / SUM(`Households`), 2) AS Percent_3_or_More_Couples,
+    ROUND(SUM(`Married_couples_None_Households`) * 100.0 / SUM(`Households`), 2) AS Percent_No_Couples
+FROM 
+    census
+GROUP BY 
+    `State/UT`;
+```
+
+* **19. How many households fall below the poverty line in each state based on the power parity categories?**
+```sql
+SELECT 
+    `State/UT` AS State_Name,
+    SUM(`Power_Parity_Less_than_Rs_45000`) AS Households_Below_Poverty_Line
+FROM 
+    census
+GROUP BY 
+    `State/UT`;
+```
+
+* **20. What is the overall literacy rate (percentage of literate population) in each state?**
+```sql
+SELECT 
+    `State/UT` AS State_Name,
+    (SUM(`Literate`) / SUM(`Population`) * 100) AS Literacy_Rate_Percentage
+FROM 
+    census
+GROUP BY 
+    `State/UT`;
+```
