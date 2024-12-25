@@ -21,7 +21,8 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 * **Task 3:** Handling new State/UT formations (Telangana, Ladakh).
 * **Task 4:** Processing missing data with logical computations.
 * **Task 5:** Saving the cleaned data to MongoDB.
-* **Task 6:** Uploading data to relational databases
+* **Task 6:** Uploading data to relational databases.
+* **Task 7:** Executing queries and displaying results using Streamlit.
 
   ### Pipeline Diagram
   
