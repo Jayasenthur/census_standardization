@@ -79,7 +79,7 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
   * `Relational Database Storage`: Data from MongoDB collections is uploaded to SQL-based relational databases (e.g., MySQL).
   * `Querying`: Running the project-specific queries to extract insights like population distribution, literacy rates, and household conditions.
   * `Streamlit Integration`: SQL queries are executed in Python, and results are displayed via Streamlit.
-  *  'Library` : `mysql.connector` is used for connecting to MySQL databases.
+  *  `Library` : `mysql.connector` is used for connecting to MySQL databases.
  
 ## MongoDB
 
@@ -87,14 +87,14 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 * **How It’s Used:**
  * `Storing Processed Data`: Processed census data is saved as a MongoDB collection named `census`.
  *  `Data Retrieval`: MongoDB serves as the source for transferring data to a relational database.
- *  'Library` : `pymongo` is used for interacting with MongoDB databases.
+ *  `Library` : `pymongo` is used for interacting with MongoDB databases.
 
 ## Streamlit
 
 * **Role :** Streamlit provides the user interface for interaction, data visualization, and displaying query results.
 * * **How It’s Used:**
-  * `Visualization`: Charts, tables, and graphs are displayed for insights like household size distribution or population breakdown.
-  * `Query Execution`: Users select predefined queries, and the app fetches and displays the results dynamically.
+  * `Creating a User Interface`: It provides an easy-to-use web interface for users to interact with the data and see results.
+  * `Displaying Results`: Streamlit shows the analysis results, like charts or tables, so users can easily understand the data.
   * `User Interaction`: Input options allow users to explore different aspects of the census data (e.g., filtering by district or state).
   * `Real-Time Results`: Displays query outputs and visualizations in an intuitive dashboard format.
 
@@ -618,3 +618,5 @@ FROM
 GROUP BY 
     `State/UT`;
 ```
+
+
