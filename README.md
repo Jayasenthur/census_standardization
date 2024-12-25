@@ -65,7 +65,7 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
  
 ## Pandas
 
-* **Role :** Pandas is used for data manipulation and processing.
+* **Role :** Pandas a powerful Python library is used for data manipulation and processing.
 * **How It’s Used:**
   * `Data Cleaning`: Renaming columns, standardizing data formats, and handling missing values.
   * `Data Analysis`: Performing aggregations (e.g., total population, literacy rates) and deriving insights like household distributions and age groups.
@@ -79,6 +79,7 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
   * `Relational Database Storage`: Data from MongoDB collections is uploaded to SQL-based relational databases (e.g., MySQL).
   * `Querying`: Running the project-specific queries to extract insights like population distribution, literacy rates, and household conditions.
   * `Streamlit Integration`: SQL queries are executed in Python, and results are displayed via Streamlit.
+  *  'Library` : `mysql.connector` is used for connecting to MySQL databases.
  
 ## MongoDB
 
@@ -86,6 +87,7 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 * **How It’s Used:**
  * `Storing Processed Data`: Processed census data is saved as a MongoDB collection named `census`.
  *  `Data Retrieval`: MongoDB serves as the source for transferring data to a relational database.
+ *  'Library` : `pymongo` is used for interacting with MongoDB databases.
 
 ## Streamlit
 
