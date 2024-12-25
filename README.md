@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project focuses on cleaning, processing, and analyzing census data to ensure uniformity, accuracy, and accessibility. 
+This project focuses on cleaning, processing, and analyzing census data to ensure uniformity, accuracy, and accessibility for further analysis and visualization. 
 
 ## Basic workflow
 
