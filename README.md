@@ -57,10 +57,10 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 
 * **Role :**  Python serves as the backbone of the project, orchestrating all the tasks from data cleaning to visualization.
 * **How It’s Used:**
-  * Reading census data from files (CSV, TXT, etc.).
-  * Automating data cleaning tasks, such as renaming columns, formatting State/UT names, and processing missing data.
-  * Implementing conditional logic for specific tasks, such as splitting states based on historical changes.
-  * Establishing connections with databases (MongoDB and relational databases).
+  *  `Data Cleaning`: Reading census data from files (CSV, TXT, etc.) into memory.
+  * `Data Analysis`: Provides the logic and structure for analysis workflows.
+  * `Data Validation`: Implements checks and controls for validation processes.
+  * `Data Exporting` Integrates with databases and storage systems for saving processed data.
   * Writing queries for analysis and running them programmatically.
  
 ## Pandas
@@ -68,9 +68,9 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 * **Role :** Pandas is used for data manipulation and processing.
 * **How It’s Used:**
   * `Data Cleaning`: Renaming columns, standardizing data formats, and handling missing values.
-  * `Analysis`: Performing aggregations (e.g., total population, literacy rates) and deriving insights like household distributions and age groups.
-  * `Validation`: Verifying calculations like the total population by summing subsets (e.g., male + female).
-  * `Exporting Data`: Preparing the cleaned and processed data for storage in MongoDB or a relational database.
+  * `Data Analysis`: Performing aggregations (e.g., total population, literacy rates) and deriving insights like household distributions and age groups.
+  * `Data Validation`: Verifies data accuracy, such as ensuring that the total population matches the sum of male and female populations.
+  * `Data Exporting`: Preparing the cleaned and processed data for storage in MongoDB or a relational database.
 
 ## SQL
 
