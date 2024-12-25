@@ -72,6 +72,14 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
   * `Data Validation`: Verifies data accuracy, such as ensuring that the total population matches the sum of male and female populations.
   * `Data Exporting`: Preparing the cleaned and processed data for storage in MongoDB or a relational database.
 
+## MongoDB
+
+* **Role :** MongoDB acts as the initial data storage layer for unstructured or semi-structured data.
+* **How It’s Used:**
+ * `Storing Processed Data`: Processed census data is saved as a MongoDB collection named `census`.
+ *  `Data Retrieval`: MongoDB serves as the source for transferring data to a relational database.
+ *  `Library` : `pymongo` is used for interacting with MongoDB databases.
+   
 ## SQL
 
 * **Role :** SQL is used for structured data storage, querying, and analysis.
@@ -81,13 +89,7 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
   * `Streamlit Integration`: SQL queries are executed in Python, and results are displayed via Streamlit.
   *  `Library` : `mysql.connector` is used for connecting to MySQL databases.
  
-## MongoDB
 
-* **Role :** MongoDB acts as the initial data storage layer for unstructured or semi-structured data.
-* **How It’s Used:**
- * `Storing Processed Data`: Processed census data is saved as a MongoDB collection named `census`.
- *  `Data Retrieval`: MongoDB serves as the source for transferring data to a relational database.
- *  `Library` : `pymongo` is used for interacting with MongoDB databases.
 
 ## Streamlit
 
