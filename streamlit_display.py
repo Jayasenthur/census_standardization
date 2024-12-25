@@ -246,13 +246,11 @@ if query:
         # Fetch the data from the database
         df = pd.read_sql(query_to_run, engine)
         st.write(f"Results for: {query}")
-        #st.write(df["District"])
-
-          # Specific query check for charting
+        
+         # Specific query check for charting
         if query == "Overall literacy rate (percentage of literate population) in each state":
 
-            # Example: Plotting a bar chart for LPG or PNG households
-            #plt.figure(figsize=(10, 6))
+            # Example: Plotting a bar chart 
             plt.figure()
             plt.bar(df['State_Name'], df['Literacy_Rate_Percentage'])
             plt.xlabel('State')
@@ -260,12 +258,10 @@ if query:
             plt.xticks(rotation=45,fontsize=4)
             plt.tight_layout()
             st.pyplot(plt)
-
-                     
+               
 
         # Add more specific query checks here if needed
         else:
-
          st.dataframe(df)  # Display the query result in a table format
     except Exception as e:
         st.error(f"Error fetching data: {e}")
