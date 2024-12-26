@@ -8,9 +8,9 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 
 * **1. Data Acquisition :** Collect census data from structured files , read additional files (e.g., district lists for new states) and integrate them.
 * **2. Data Cleaning :**  Renaming columns, standardizing State/UT names, and handling missing data.
-* **3. Handling Missing Data :** Detect missing data percentages, Impute missing values using logical relationships (e.g., `Population = Male + Female)`.
-* **4. State/UT Formation Handling :** Accounting for Telangana (2014) and Ladakh (2019) by processing district-specific changes.
-* **5. Data Storage :** Saving processed data to MongoDB
+* **3. State/UT Formation Handling :** Accounting for Telangana (2014) and Ladakh (2019) by processing district-specific changes.
+* **4. Handling Missing Data :** Detect missing data percentages, Impute missing values using logical relationships (e.g., `Population = Male + Female)`.
+* **5. Database Storage :** Saving processed data to MongoDB
 * **6. Database Connection :** Fetching data from the mongoDB and uploading to a relational database using python code.
 * **7. Querying and Visualization :** Executing queries and displaying results using Streamlit for user-friendly dashboards.
   
