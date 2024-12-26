@@ -7,7 +7,7 @@ This project focuses on cleaning, processing, and analyzing census data to ensur
 ## Basic workflow
 
 * **1. Data Acquisition :** Collect census data from structured files , read additional files (e.g., district lists for new states) and integrate them.
-* **2. Data Cleaning :**  Renaming columns, standardizing State/UT names, and handling missing data.
+* **2. Data Cleaning :**  Renaming columns
 * **3. State/UT Formation Handling :** Accounting for Telangana (2014) and Ladakh (2019) by processing district-specific changes.
 * **4. Handling Missing Data :** Detect missing data percentages, Impute missing values using logical relationships (e.g., `Population = Male + Female)`.
 * **5. Database Storage :** Saving processed data to MongoDB
